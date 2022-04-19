@@ -46,6 +46,11 @@ namespace MyBot.UserStates
                 user.State.SetState(new DefaultState());
             }
 
+            else if(update.CallbackQuery.Data == "contact_state")
+            {
+                await botClient.SendContactAsync(user.Id, "8(924)-940-69-98", "Pasha-kto003");
+            }
+
             await Task.CompletedTask;
         }
 

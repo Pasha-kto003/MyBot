@@ -23,11 +23,12 @@ namespace MyBot.UserStates
                     new[]{
                         InlineKeyboardButton.WithCallbackData(text: "Выбрать препарат", callbackData: "main_state1"),
                         InlineKeyboardButton.WithCallbackData(text: "Подсказки", callbackData: "main_state2"),
+                        InlineKeyboardButton.WithCallbackData(text: "Контакты автора", callbackData: "contact_state")
                     });
 
                 // меняем интерфейс
                 await botClient.SendTextMessageAsync(update.Message.Chat.Id,
-                    "Добро пожаловать в нашу аптеку: что вам нужно???",
+                    $"Добро пожаловать в нашу аптеку {update.Message.Chat.Username}: что вам нужно???",
                     ParseMode.Markdown,
                     replyMarkup: replyKeyboardMarkup);
 
