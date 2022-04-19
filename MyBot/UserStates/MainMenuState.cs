@@ -15,6 +15,12 @@ namespace MyBot.UserStates
     {
         public List<Drug> Drugs = new List<Drug>();
         public List<User> Users = new List<User>();
+
+        //public override Task Update(Drug drug, User user, ITelegramBotClient botClient, Update update)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         public override async Task UpdateHandler(User user, ITelegramBotClient botClient, Update update)
         {
             var connection = DbInstance.Get();

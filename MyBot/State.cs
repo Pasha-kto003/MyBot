@@ -12,5 +12,6 @@ namespace MyBot
     public abstract class State
     {
         public abstract Task UpdateHandler(User user, ITelegramBotClient botClient, Update update);
+        //public abstract Task Update(Drug drug, User user, ITelegramBotClient botClient, Update update);
     }
 }

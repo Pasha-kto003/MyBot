@@ -22,8 +22,6 @@ namespace MyBot
             var connection = DbInstance.Get();
             Drugs = new List<Drug>(connection.Drugs.ToList());
 
-
-
             using var cts = new CancellationTokenSource();
 
             ReceiverOptions receiverOptions = new() { AllowedUpdates = { } };

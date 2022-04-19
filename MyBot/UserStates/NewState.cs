@@ -27,5 +27,23 @@ namespace MyBot.UserStates
 
             await Task.CompletedTask;
         }
+
+
+        //public override async Task Update(Drug drug, User user, ITelegramBotClient botClient, Update update)
+        //{
+        //    if (update.CallbackQuery == null)
+        //        return;
+
+        //    if (update.CallbackQuery.Data == "main_state3")
+        //    {
+        //        await botClient.SendTextMessageAsync(user.Id, $"{drug.Title}");
+        //    }
+        //    else if (update.CallbackQuery.Data == "main_state4")
+        //    {
+        //        await botClient.SendTextMessageAsync(user.Id, $"{drug.Title}");
+        //    }
+
+        //    await Task.CompletedTask;
+        //}
     }
 }
