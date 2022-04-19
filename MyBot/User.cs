@@ -1,4 +1,5 @@
-﻿using MyBot.UserStates;
+﻿using MyBot.db;
+using MyBot.UserStates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace MyBot
         public long Id { get; set; }
         public string UserName { get; set; }
         public StateMachine State { get; set; }
-
+        public Drug Drug { get; set; }
         public User()
         {
             State = new StateMachine(this, new DefaultState());

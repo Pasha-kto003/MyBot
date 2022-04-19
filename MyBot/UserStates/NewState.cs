@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBot.db;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using Telegram.Bot.Types;
 
 namespace MyBot.UserStates
 {
-    class NewState : State
+    public class NewState : State
     {
         public override async Task UpdateHandler(User user, ITelegramBotClient botClient, Update update)
         {
@@ -22,7 +23,6 @@ namespace MyBot.UserStates
             else if (update.CallbackQuery.Data == "main_state4")
             {
                 await botClient.SendTextMessageAsync(user.Id, "hi");
-
             }
 
             await Task.CompletedTask;

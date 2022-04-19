@@ -25,19 +25,18 @@ namespace MyBot.UserStates
 
             if (update.CallbackQuery.Data == "main_state1")
             {
-                //Get();
-                foreach (Drug drug in Drugs)
+                var keyBoard = new List<List<InlineKeyboardButton>>();
+
+                foreach(Drug drug in Drugs)
                 {
-                    InlineKeyboardMarkup replyKeyboardMarkup = new(
-                    new[]{
-                        InlineKeyboardButton.WithCallbackData(text: "3", callbackData: "main_state3"),
-                        InlineKeyboardButton.WithCallbackData(text: "4", callbackData: "main_state4"),
-                    });
-                    await botClient.SendTextMessageAsync(user.Id,
-                    "Вот наш каталог товаров",
-                    ParseMode.Markdown,
-                    replyMarkup: replyKeyboardMarkup);
+                    keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title) });
                 }
+
+                var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: "Вот наш ассортимент",
+                    replyMarkup: replyKeyBoardMarkup));
 
                 user.State.SetState(new NewState());
             }

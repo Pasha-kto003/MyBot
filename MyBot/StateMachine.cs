@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBot.db;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace MyBot
     public class StateMachine
     {
         private readonly User user;
+        private readonly Drug drug;
         State state;
 
         public StateMachine(User user, State defaultState)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBot.UserStates;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
@@ -12,5 +13,12 @@ namespace MyBot.db
         public string Description { get; set; }
         public int Count { get; set; }
         public int Cost { get; set; }
+
+        //public StateMachine State { get; set; }
+
+        //public Drug()
+        //{
+        //    State = new StateMachine(this, new DefaultState());
+        //}
     }
 }
