@@ -41,6 +41,17 @@ namespace MyBot
                 Users.AddUser(userId, update.Message?.From.Username)
                     .State
                     .UpdateHandler(botClient, update);
+
+            if(update.Type == UpdateType.Message)
+            {
+                if(update.Message.Type == MessageType.Text)
+                {
+                    var text = update.Message.Text;
+                    var id = update.Message.Chat.Id;
+                    string userName = update.Message.Chat.Username;
+                    Console.WriteLine($"{userName} | {id} | {text}");
+                }
+            }
         }
     }
 }
