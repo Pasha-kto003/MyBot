@@ -29,7 +29,7 @@ namespace MyBot.UserStates
 
                 foreach(Drug drug in Drugs)
                 {
-                    keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title) });
+                    keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "main_state3") });
                 }
 
                 var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
