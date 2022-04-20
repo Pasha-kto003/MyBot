@@ -30,12 +30,25 @@ namespace MyBot.UserStates
             {
                 foreach(Drug drug in drugsGood)
                 {
-                    keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "main_state3") });
+                    keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "help_state2") });
                 }
                 var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
                     text: "Если у вас вполне стабильное количество здоровья вам подойдет данный препарат",
+                    replyMarkup: replyKeyBoardMarkup));
+            }
+
+            if(update.CallbackQuery.Data == "middleStatus_state")
+            {
+                foreach (Drug drug in drugsMiddle)
+                {
+                    keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "help_state3") });
+                }
+                var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: "Если у вас среднее количество здоровья",
                     replyMarkup: replyKeyBoardMarkup));
             }
 
