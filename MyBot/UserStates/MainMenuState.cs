@@ -15,7 +15,6 @@ namespace MyBot.UserStates
     {
         public List<Drug> Drugs = new List<Drug>();
         public List<User> Users = new List<User>();
-
         //public override Task Update(Drug drug, User user, ITelegramBotClient botClient, Update update)
         //{
         //    throw new NotImplementedException();
@@ -55,6 +54,24 @@ namespace MyBot.UserStates
             else if(update.CallbackQuery.Data == "contact_state")
             {
                 await botClient.SendContactAsync(user.Id, "8(924)-940-69-98", "Pasha-kto003");
+            }
+
+            else if(update.CallbackQuery.Data == "help_state")
+            {
+                var keyBoard = new List<List<InlineKeyboardButton>>();
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
+                    new[]{
+                        InlineKeyboardButton.WithCallbackData(text: "Стабильный", callbackData: "goodStatus_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Средний", callbackData: "middleStatus_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Малый запас здоровья", callbackData: "criticalStatus_state"),     
+                    });
+
+                // меняем интерфейс
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: "Какой у вас запас здоровья",
+                    replyMarkup: replyKeyboardMarkup));
+                user.State.SetState(new StatusState());
             }
 
             await Task.CompletedTask;

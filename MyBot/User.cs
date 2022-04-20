@@ -14,6 +14,8 @@ namespace MyBot
         public string UserName { get; set; }
         public StateMachine State { get; set; }
         public Drug Drug { get; set; }
+        public int DrugId { get; set; }
+
         public User()
         {
             State = new StateMachine(this, new DefaultState());

@@ -28,7 +28,8 @@ namespace MyBot.UserStates
                     new[]{
                         InlineKeyboardButton.WithCallbackData(text: "Выбрать препарат", callbackData: "main_state1"),
                         InlineKeyboardButton.WithCallbackData(text: "Подсказки", callbackData: "main_state2"),
-                        InlineKeyboardButton.WithCallbackData(text: "Контакты автора", callbackData: "contact_state")
+                        InlineKeyboardButton.WithCallbackData(text: "Контакты автора", callbackData: "contact_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Подобрать препарат?", callbackData: "help_state")
                     });
 
                 // меняем интерфейс
