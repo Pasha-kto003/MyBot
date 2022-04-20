@@ -51,6 +51,7 @@ namespace MyBot.UserStates
                     chatId: user.Id,
                     text: "Если у вас среднее количество здоровья",
                     replyMarkup: replyKeyBoardMarkup));
+                user.State.SetState(new SelectedStatus());
             }
 
             if(update.CallbackQuery.Data == "criticalStatus_state")
@@ -64,6 +65,7 @@ namespace MyBot.UserStates
                     chatId: user.Id,
                     text: "Данные препараты подходят если у вас критический уровень здоровья",
                     replyMarkup: replyKeyBoardMarkup));
+                user.State.SetState(new SelectedStatus());
             }
 
         }
