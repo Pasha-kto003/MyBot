@@ -44,7 +44,14 @@ namespace MyBot.UserStates
             {
                 foreach (Drug drug in drugsMiddle)
                 {
-                    keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "help_state3") });
+                    if(drug.Title == "Крепкое лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "help_state3") });
+                    }
+                    else if(drug.Title == "Обычное лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "help_state5") });
+                    }
                 }
                 var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
                 Console.WriteLine(await botClient.SendTextMessageAsync(

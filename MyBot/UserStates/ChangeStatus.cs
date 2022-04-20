@@ -22,21 +22,55 @@ namespace MyBot.UserStates
         {
             var connection = DbInstance.Get();
             Drugs = new List<Drug>(connection.Drugs.ToList());
-            user.Drug = Drugs.FirstOrDefault(s => s.Title == "Аспирин");
-            TitleProduct = user.Drug.Title;
-            Cost = user.Drug.Cost;
-            Count = user.Drug.Count;
-            Description = user.Drug.Description;
-
+            
             if (update.CallbackQuery == null)
                 return;
 
             if(update.CallbackQuery.Data == "YStatus_state")
             {
+                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Аспирин");
+                user.DrugId = user.Drug.Id;
+                Cost = user.Drug.Cost;
+                Count = user.Drug.Count;
+                Description = user.Drug.Description;
                 await botClient.SendTextMessageAsync(user.Id, $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег");
             }
 
             else if (update.CallbackQuery.Data == "NStatus_state")
+            {
+                await botClient.SendTextMessageAsync(user.Id, $"Окей, возвращаемся назад!!!");
+                user.State.SetState(new MainMenuState());
+            }
+
+            else if(update.CallbackQuery.Data == "YStatusMiddle_state")
+            {
+                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Крепкое лекарство");
+                user.DrugId = user.Drug.Id;
+                TitleProduct = user.Drug.Title;
+                Cost = user.Drug.Cost;
+                Count = user.Drug.Count;
+                Description = user.Drug.Description;
+                await botClient.SendTextMessageAsync(user.Id, $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег");
+            }
+
+            else if(update.CallbackQuery.Data == "NStatusMiddle_state")
+            {
+                await botClient.SendTextMessageAsync(user.Id, $"Окей, возвращаемся назад!!!");
+                user.State.SetState(new MainMenuState());
+            }
+
+            else if (update.CallbackQuery.Data == "YStatusMiddleCopy_state")
+            {
+                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Обычное лекарство");
+                user.DrugId = user.Drug.Id;
+                TitleProduct = user.Drug.Title;
+                Cost = user.Drug.Cost;
+                Count = user.Drug.Count;
+                Description = user.Drug.Description;
+                await botClient.SendTextMessageAsync(user.Id, $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег");
+            }
+
+            else if (update.CallbackQuery.Data == "NStatusMiddleCopy_state")
             {
                 await botClient.SendTextMessageAsync(user.Id, $"Окей, возвращаемся назад!!!");
                 user.State.SetState(new MainMenuState());

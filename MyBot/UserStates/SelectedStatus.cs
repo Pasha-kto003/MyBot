@@ -51,7 +51,7 @@ namespace MyBot.UserStates
 
             else if(update.CallbackQuery.Data == "help_state3")
             {
-                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Обычное лекарство" || s.Title == "Крепкое лекарство");
+                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Крепкое лекарство");
                 user.DrugId = user.Drug.Id;
                 TitleProduct = user.Drug.Title;
                 Cost = user.Drug.Cost;
@@ -60,8 +60,30 @@ namespace MyBot.UserStates
 
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                   new[]{
-                        InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatus_state"),
-                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus_state")
+                        InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusMiddle_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusMiddle_state")
+                  });
+
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
+                    replyMarkup: replyKeyboardMarkup));
+                user.State.SetState(new ChangeStatus());
+            }
+
+            else if (update.CallbackQuery.Data == "help_state5")
+            {
+                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Обычное лекарство");
+                user.DrugId = user.Drug.Id;
+                TitleProduct = user.Drug.Title;
+                Cost = user.Drug.Cost;
+                Count = user.Drug.Count;
+                Description = user.Drug.Description;
+
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
+                  new[]{
+                        InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusMiddleCopy_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusMiddleCopy_state")
                   });
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
