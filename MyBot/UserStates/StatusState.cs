@@ -20,8 +20,8 @@ namespace MyBot.UserStates
             var keyBoard = new List<List<InlineKeyboardButton>>();
 
             var drugsGood = Drugs.Where(s=> s.Cost < 100);
-            var drugsMiddle = Drugs.Where(s => s.Cost < 200);
-            var drugsCritical = Drugs.Where(s => s.Cost <= 300);
+            var drugsMiddle = Drugs.Where(s => s.Cost >= 100 && s.Cost < 200);
+            var drugsCritical = Drugs.Where(s => s.Cost > 200);
 
             if (update.CallbackQuery == null)
                 return;
@@ -37,6 +37,7 @@ namespace MyBot.UserStates
                     chatId: user.Id,
                     text: "Если у вас вполне стабильное количество здоровья вам подойдет данный препарат",
                     replyMarkup: replyKeyBoardMarkup));
+                user.State.SetState(new SelectedStatus());
             }
 
             if(update.CallbackQuery.Data == "middleStatus_state")
@@ -49,6 +50,19 @@ namespace MyBot.UserStates
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
                     text: "Если у вас среднее количество здоровья",
+                    replyMarkup: replyKeyBoardMarkup));
+            }
+
+            if(update.CallbackQuery.Data == "criticalStatus_state")
+            {
+                foreach(Drug drug in drugsCritical)
+                {
+                    keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "help_state4") });
+                }
+                var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: "Данные препараты подходят если у вас критический уровень здоровья",
                     replyMarkup: replyKeyBoardMarkup));
             }
 
