@@ -75,6 +75,25 @@ namespace MyBot.UserStates
                 await botClient.SendTextMessageAsync(user.Id, $"Окей, возвращаемся назад!!!");
                 user.State.SetState(new MainMenuState());
             }
+
+            else if (update.CallbackQuery.Data == "YStatusCritical_state")
+            {
+                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Отличное лекарство");
+                user.DrugId = user.Drug.Id;
+                TitleProduct = user.Drug.Title;
+                Cost = user.Drug.Cost;
+                Count = user.Drug.Count;
+                Description = user.Drug.Description;
+                await botClient.SendTextMessageAsync(user.Id, $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег");
+            }
+
+            else if (update.CallbackQuery.Data == "NStatusCritical_state")
+            {
+                await botClient.SendTextMessageAsync(user.Id, $"Окей, возвращаемся назад!!!");
+                user.State.SetState(new MainMenuState());
+            }
+
+
         }
     }
 }
