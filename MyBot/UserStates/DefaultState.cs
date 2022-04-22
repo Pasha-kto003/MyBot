@@ -13,13 +13,13 @@ namespace MyBot.UserStates
 {
     class DefaultState : State
     {
-        //public override Task Update(Drug drug, User user, ITelegramBotClient botClient, Update update)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public List<Drug> Drugs = new List<Drug>();
 
         public override async Task UpdateHandler(User user, ITelegramBotClient botClient, Update update)
         {
+            var connection = DbInstance.Get();
+            Drugs = new List<Drug>(connection.Drugs.ToList());
+
             if (update.Message == null)
                 return;
             if (update.Message.Text == "/start")

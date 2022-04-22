@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace MyBot.UserStates
 {
@@ -33,7 +34,17 @@ namespace MyBot.UserStates
                 Cost = user.Drug.Cost;
                 Count = user.Drug.Count;
                 Description = user.Drug.Description;
-                await botClient.SendTextMessageAsync(user.Id, $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег");
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
+                  new[]{
+                        InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "My_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "No_state")
+                  });
+
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег, хотите выбрать еще один препарат?",
+                    replyMarkup: replyKeyboardMarkup));
+                user.State.SetState(new FinalState());
             }
 
             else if (update.CallbackQuery.Data == "NStatus_state")
@@ -50,7 +61,17 @@ namespace MyBot.UserStates
                 Cost = user.Drug.Cost;
                 Count = user.Drug.Count;
                 Description = user.Drug.Description;
-                await botClient.SendTextMessageAsync(user.Id, $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег");
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
+                  new[]{
+                        InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "My_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "No_state")
+                  });
+
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег, хотите выбрать еще один препарат?",
+                    replyMarkup: replyKeyboardMarkup));
+                user.State.SetState(new FinalState());
             }
 
             else if(update.CallbackQuery.Data == "NStatusMiddle_state")
@@ -67,7 +88,17 @@ namespace MyBot.UserStates
                 Cost = user.Drug.Cost;
                 Count = user.Drug.Count;
                 Description = user.Drug.Description;
-                await botClient.SendTextMessageAsync(user.Id, $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег");
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
+                  new[]{
+                        InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "My_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "No_state")
+                  });
+
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег, хотите выбрать еще один препарат?",
+                    replyMarkup: replyKeyboardMarkup));
+                user.State.SetState(new FinalState());
             }
 
             else if (update.CallbackQuery.Data == "NStatusMiddleCopy_state")
@@ -84,7 +115,17 @@ namespace MyBot.UserStates
                 Cost = user.Drug.Cost;
                 Count = user.Drug.Count;
                 Description = user.Drug.Description;
-                await botClient.SendTextMessageAsync(user.Id, $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег");
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
+                  new[]{
+                        InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "My_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "No_state")
+                  });
+
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: $"Препарат {user.Drug.Title} приобретен на сумму {user.Drug.Cost} денег, хотите выбрать еще один препарат?",
+                    replyMarkup: replyKeyboardMarkup));
+                user.State.SetState(new FinalState());
             }
 
             else if (update.CallbackQuery.Data == "NStatusCritical_state")
@@ -92,8 +133,6 @@ namespace MyBot.UserStates
                 await botClient.SendTextMessageAsync(user.Id, $"Окей, возвращаемся назад!!!");
                 user.State.SetState(new MainMenuState());
             }
-
-
         }
     }
 }

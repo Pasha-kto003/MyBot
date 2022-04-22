@@ -34,7 +34,24 @@ namespace MyBot.UserStates
 
                 foreach(Drug drug in Drugs)
                 {
-                    keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "main_state3") });
+
+                    if (drug.Title == "Обычное лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SimpleDrug_state") });
+                    }
+                    if (drug.Title == "Аспирин")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "Aspirin_state") });
+                    }
+                    if (drug.Title == "Крепкое лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "StrongDrug_state") });
+                    }
+
+                    if (drug.Title == "Отличное лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SuperDrug_state") });
+                    }
                 }
 
                 var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
