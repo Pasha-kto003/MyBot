@@ -15,6 +15,7 @@ namespace MyBot.UserStates
     {
         public List<Drug> Drugs = new List<Drug>();
         public List<User> Users = new List<User>();
+        public List<Order> Orders = new List<Order>();
         //public override Task Update(Drug drug, User user, ITelegramBotClient botClient, Update update)
         //{
         //    throw new NotImplementedException();
@@ -24,6 +25,7 @@ namespace MyBot.UserStates
         {
             var connection = DbInstance.Get();
             Drugs = new List<Drug>(connection.Drugs.ToList());
+            Orders = new List<Order>(connection.Orders.ToList());
 
             if (update.CallbackQuery == null)
                 return;
@@ -89,6 +91,40 @@ namespace MyBot.UserStates
                     text: "Какой у вас запас здоровья",
                     replyMarkup: replyKeyboardMarkup));
                 user.State.SetState(new StatusState());
+            }
+
+            if (update.CallbackQuery.Data == "order_state")
+            {
+                var keyBoard = new List<List<InlineKeyboardButton>>();
+
+                foreach (Drug drug in Drugs)
+                {
+
+                    if (drug.Title == "Обычное лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SimpleOrder_state") });
+                    }
+                    if (drug.Title == "Аспирин")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "AspirinOrder_state") });
+                    }
+                    if (drug.Title == "Крепкое лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "StrongOrder_state") });
+                    }
+
+                    if (drug.Title == "Отличное лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SuperOrder_state") });
+                    }
+                }
+
+                var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: "Выбирите лекарство",
+                    replyMarkup: replyKeyBoardMarkup));
+                user.State.SetState(new OrderState());
             }
 
             await Task.CompletedTask;

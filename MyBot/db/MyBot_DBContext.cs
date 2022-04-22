@@ -18,6 +18,8 @@ namespace MyBot.db
         }
 
         public virtual DbSet<Drug> Drugs { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Worker> Workers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -43,6 +45,52 @@ namespace MyBot.db
                     .IsUnicode(false);
 
                 entity.Property(e => e.Title)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.ToTable("Order");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.DateOrder).HasColumnType("datetime");
+
+                entity.Property(e => e.DrugId).HasColumnName("DrugID");
+
+                entity.Property(e => e.NumberOfOrder)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.WorkerId).HasColumnName("WorkerID");
+
+                entity.HasOne(d => d.Drug)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.DrugId)
+                    .HasConstraintName("FK_Order_Drug");
+
+                entity.HasOne(d => d.Worker)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.WorkerId)
+                    .HasConstraintName("FK_Order_Worker");
+            });
+
+            modelBuilder.Entity<Worker>(entity =>
+            {
+                entity.ToTable("Worker");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Patronimyc)
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });

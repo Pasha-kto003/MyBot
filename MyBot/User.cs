@@ -15,6 +15,8 @@ namespace MyBot
         public StateMachine State { get; set; }
         public Drug Drug { get; set; }
         public int DrugId { get; set; }
+        public Order Order { get; set; }
+        public int OrderId { get; set; }
 
         public User()
         {

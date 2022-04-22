@@ -5,18 +5,18 @@ using System.Collections.Generic;
 
 namespace MyBot.db
 {
-    public partial class Drug
+    public partial class Worker
     {
-        public Drug()
+        public Worker()
         {
             Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public int Count { get; set; }
-        public int Cost { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Patronimyc { get; set; }
+        public int? PhoneNumber { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
     }
