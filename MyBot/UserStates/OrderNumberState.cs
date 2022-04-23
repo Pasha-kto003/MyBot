@@ -31,9 +31,8 @@ namespace MyBot.UserStates
 
             Console.WriteLine(await botClient.SendTextMessageAsync(
                 chatId: user.Id,
-                text: $"Номер заказа: {user.Order.NumberOfOrder}",
+                text: $"Подтвердите номер вашего заказа: {user.Order.NumberOfOrder}",
                 replyMarkup: replyKeyboardMarkup));
-            user.State.SetState(new ChangeStatus());
 
             user.State.SetState(new OrderFinalState());
             await Task.CompletedTask;

@@ -21,24 +21,46 @@ namespace MyBot.UserStates
             Drugs = new List<Drug>(connection.Drugs.ToList());
             Orders = new List<Order>(connection.Orders.ToList());
 
-            
-
             if (update.CallbackQuery == null)
                 return;
 
             if(update.CallbackQuery.Data == "YStatusOrder_state")
             {
-
                 user.Drug = Drugs.FirstOrDefault(s => s.Title == "Аспирин");
                 user.DrugId = user.Drug.Id;
 
                 await botClient.SendTextMessageAsync(user.Id, "Введите номер заказа");
                 user.State.SetState(new OrderNumberState());
-
-
-                await Task.CompletedTask;
             }
 
+            else if (update.CallbackQuery.Data == "YStatusSipleOrder_state")
+            {
+                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Обычное лекарство");
+                user.DrugId = user.Drug.Id;
+
+                await botClient.SendTextMessageAsync(user.Id, "Введите номер заказа");
+                user.State.SetState(new OrderNumberState());
+            }
+
+            else if (update.CallbackQuery.Data == "YStatusStrongOrder_state")
+            {
+                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Крепкое лекарство");
+                user.DrugId = user.Drug.Id;
+
+                await botClient.SendTextMessageAsync(user.Id, "Введите номер заказа");
+                user.State.SetState(new OrderNumberState());
+            }
+
+            else if (update.CallbackQuery.Data == "YStatusSuperOrder_state")
+            {
+                user.Drug = Drugs.FirstOrDefault(s => s.Title == "Отличное лекарство");
+                user.DrugId = user.Drug.Id;
+
+                await botClient.SendTextMessageAsync(user.Id, "Введите номер заказа");
+                user.State.SetState(new OrderNumberState());
+            }
+
+            await Task.CompletedTask;
         }
     }
 }

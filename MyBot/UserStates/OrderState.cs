@@ -33,7 +33,7 @@ namespace MyBot.UserStates
                     user.DrugId = user.Drug.Id;
                     user.Order.Drug = Drugs.FirstOrDefault(s => s.Title == "Аспирин");
                     user.Order.DrugId = user.DrugId;
-                InlineKeyboardMarkup replyKeyboardMarkup = new(
+                    InlineKeyboardMarkup replyKeyboardMarkup = new(
                        new[]{
                             InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusOrder_state"),
                             InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
@@ -46,15 +46,16 @@ namespace MyBot.UserStates
                     user.State.SetState(new OrderReady());
                 }
 
-                if (update.CallbackQuery.Data == "SimpleDrugOrder_state")
+                if (update.CallbackQuery.Data == "SimpleOrder_state")
                 {
                     //user.Order.Drug = connection.Drugs.ToList()[(int.Parse(update.CallbackQuery.Data)) - 1];
                     user.Drug = Drugs.FirstOrDefault(s => s.Title == "Обычное лекарство");
                     user.DrugId = user.Drug.Id;
-
+                    user.Order.Drug = Drugs.FirstOrDefault(s => s.Title == "Обычное лекарство");
+                    user.Order.DrugId = user.DrugId;
                     InlineKeyboardMarkup replyKeyboardMarkup = new(
                        new[]{
-                            InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatus_state"),
+                            InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusSipleOrder_state"),
                             InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus_state")
                        });
 
@@ -62,18 +63,19 @@ namespace MyBot.UserStates
                         chatId: user.Id,
                         text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                         replyMarkup: replyKeyboardMarkup));
-                    user.State.SetState(new ChangeStatus());
+                    user.State.SetState(new OrderReady());
                 }
 
-                if (update.CallbackQuery.Data == "StrongDrugOrder_state")
+                if (update.CallbackQuery.Data == "StrongOrder_state")
                 {
                     //user.Order.Drug = connection.Drugs.ToList()[(int.Parse(update.CallbackQuery.Data)) - 1];
                     user.Drug = Drugs.FirstOrDefault(s => s.Title == "Крепкое лекарство");
                     user.DrugId = user.Drug.Id;
-
+                    user.Order.Drug = Drugs.FirstOrDefault(s => s.Title == "Крепкое лекарство");
+                    user.Order.DrugId = user.DrugId;
                     InlineKeyboardMarkup replyKeyboardMarkup = new(
                        new[]{
-                            InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatus_state"),
+                            InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusStrongOrder_state"),
                             InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus_state")
                        });
 
@@ -81,18 +83,19 @@ namespace MyBot.UserStates
                         chatId: user.Id,
                         text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                         replyMarkup: replyKeyboardMarkup));
-                    user.State.SetState(new ChangeStatus());
+                    user.State.SetState(new OrderReady());
                 }
 
-                if (update.CallbackQuery.Data == "SuperDrugOrder_state")
+                if (update.CallbackQuery.Data == "SuperOrder_state")
                 {
                     //user.Order.Drug = connection.Drugs.ToList()[(int.Parse(update.CallbackQuery.Data)) - 1];
                     user.Drug = Drugs.FirstOrDefault(s => s.Title == "Отличное лекарство");
                     user.DrugId = user.Drug.Id;
-
+                    user.Order.Drug = Drugs.FirstOrDefault(s => s.Title == "Отличное лекарство");
+                    user.Order.DrugId = user.DrugId;
                     InlineKeyboardMarkup replyKeyboardMarkup = new(
                        new[]{
-                            InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatus_state"),
+                            InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusSuperOrder_state"),
                             InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus_state")
                        });
 

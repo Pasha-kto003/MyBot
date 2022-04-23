@@ -35,7 +35,7 @@ namespace MyBot.UserStates
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                        text: $"Ваш заказ: {user.Order.NumberOfOrder}\n с препаратом{user.Order.Drug.Title},\nцена заказа{user.Order.Drug.Cost} денег"));
+                        text: $"Ваш заказ: {user.Order.NumberOfOrder}\nс препаратом {user.Order.Drug.Title},\nцена заказа: {user.Order.Drug.Cost} денег"));
 
                 await Task.CompletedTask;
             } 
