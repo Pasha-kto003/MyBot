@@ -8,6 +8,16 @@ namespace MyBot.db
 {
     public partial class MyBot_DBContext : DbContext
     {
+
+        static MyBot_DBContext db;
+
+        public static MyBot_DBContext GetDB()
+        {
+            if (db == null)
+                db = new MyBot_DBContext();
+            return db;
+        }
+
         public MyBot_DBContext()
         {
         }
@@ -19,13 +29,12 @@ namespace MyBot.db
 
         public virtual DbSet<Drug> Drugs { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Worker> Workers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=DESKTOP-2KIP198\\SQLEXPRESS;Database=MyBot_DB;Trusted_Connection=True; User=dbo");
             }
         }
@@ -63,36 +72,10 @@ namespace MyBot.db
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.WorkerId).HasColumnName("WorkerID");
-
                 entity.HasOne(d => d.Drug)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.DrugId)
                     .HasConstraintName("FK_Order_Drug");
-
-                entity.HasOne(d => d.Worker)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.WorkerId)
-                    .HasConstraintName("FK_Order_Worker");
-            });
-
-            modelBuilder.Entity<Worker>(entity =>
-            {
-                entity.ToTable("Worker");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.FirstName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.LastName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Patronimyc)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

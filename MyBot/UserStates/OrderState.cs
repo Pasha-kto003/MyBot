@@ -13,14 +13,14 @@ namespace MyBot.UserStates
     class OrderState : State
     {
         public List<Drug> Drugs = new List<Drug>();
-        public List<Worker> Workers = new List<Worker>();
+        
         public List<Order> Orders = new List<Order>();
 
         public override async Task UpdateHandler(User user, ITelegramBotClient botClient, Update update)
         {
             var connection = DbInstance.Get();
             Drugs = new List<Drug>(connection.Drugs.ToList());
-            Workers = new List<Worker>(connection.Workers.ToList());
+            
             Orders = new List<Order>(connection.Orders.ToList());
 
                 if (update.CallbackQuery == null)
@@ -28,10 +28,12 @@ namespace MyBot.UserStates
 
                 if (update.CallbackQuery.Data == "AspirinOrder_state")
                 {
+                    //user.Order.Drug = connection.Drugs.ToList()[(int.Parse(update.CallbackQuery.Data)) - 1];
                     user.Drug = Drugs.FirstOrDefault(s => s.Title == "Аспирин");
                     user.DrugId = user.Drug.Id;
-
-                    InlineKeyboardMarkup replyKeyboardMarkup = new(
+                    user.Order.Drug = Drugs.FirstOrDefault(s => s.Title == "Аспирин");
+                    user.Order.DrugId = user.DrugId;
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
                        new[]{
                             InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusOrder_state"),
                             InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
@@ -46,6 +48,7 @@ namespace MyBot.UserStates
 
                 if (update.CallbackQuery.Data == "SimpleDrugOrder_state")
                 {
+                    //user.Order.Drug = connection.Drugs.ToList()[(int.Parse(update.CallbackQuery.Data)) - 1];
                     user.Drug = Drugs.FirstOrDefault(s => s.Title == "Обычное лекарство");
                     user.DrugId = user.Drug.Id;
 
@@ -64,6 +67,7 @@ namespace MyBot.UserStates
 
                 if (update.CallbackQuery.Data == "StrongDrugOrder_state")
                 {
+                    //user.Order.Drug = connection.Drugs.ToList()[(int.Parse(update.CallbackQuery.Data)) - 1];
                     user.Drug = Drugs.FirstOrDefault(s => s.Title == "Крепкое лекарство");
                     user.DrugId = user.Drug.Id;
 
@@ -82,6 +86,7 @@ namespace MyBot.UserStates
 
                 if (update.CallbackQuery.Data == "SuperDrugOrder_state")
                 {
+                    //user.Order.Drug = connection.Drugs.ToList()[(int.Parse(update.CallbackQuery.Data)) - 1];
                     user.Drug = Drugs.FirstOrDefault(s => s.Title == "Отличное лекарство");
                     user.DrugId = user.Drug.Id;
 

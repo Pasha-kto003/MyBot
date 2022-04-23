@@ -99,7 +99,10 @@ namespace MyBot.UserStates
 
                 foreach (Drug drug in Drugs)
                 {
-
+                    Order order = new Order();
+                    order.DateOrder = DateTime.Now;
+                    user.Order = order;
+                    
                     if (drug.Title == "Обычное лекарство")
                     {
                         keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SimpleOrder_state") });
