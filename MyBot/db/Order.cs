@@ -11,7 +11,9 @@ namespace MyBot.db
         public string NumberOfOrder { get; set; }
         public DateTime? DateOrder { get; set; }
         public int? DrugId { get; set; }
+        public int? DoctorId { get; set; }
 
+        public virtual Doctor Doctor { get; set; }
         public virtual Drug Drug { get; set; }
     }
 }

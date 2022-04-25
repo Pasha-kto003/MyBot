@@ -17,12 +17,12 @@ namespace MyBot
 
         public static Order GetOrder(int Id) => orders[Id];
 
-        public static Order AddOrder(int id, string title, DateTime? date, int drugID)
+        public static Order AddOrder(int id, string title, DateTime? date, int drugID, int? doctorID)
         {
             if (HasOrder(id))
                 return null;
 
-            var order = new Order { Id = id, NumberOfOrder = title, DateOrder = date, DrugId = drugID };
+            var order = new Order { Id = id, NumberOfOrder = title, DateOrder = date, DrugId = drugID, DoctorId = doctorID };
 
             _dbContext.Add(order);
             _dbContext.SaveChanges();

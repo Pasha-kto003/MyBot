@@ -43,7 +43,7 @@ namespace MyBot.UserStates
                         chatId: user.Id,
                         text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                         replyMarkup: replyKeyboardMarkup));
-                    user.State.SetState(new OrderReady());
+                    user.State.SetState(new OrderDoctorState());
                 }
 
                 if (update.CallbackQuery.Data == "SimpleOrder_state")
@@ -63,7 +63,7 @@ namespace MyBot.UserStates
                         chatId: user.Id,
                         text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                         replyMarkup: replyKeyboardMarkup));
-                    user.State.SetState(new OrderReady());
+                    user.State.SetState(new OrderDoctorState());
                 }
 
                 if (update.CallbackQuery.Data == "StrongOrder_state")
@@ -83,7 +83,7 @@ namespace MyBot.UserStates
                         chatId: user.Id,
                         text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                         replyMarkup: replyKeyboardMarkup));
-                    user.State.SetState(new OrderReady());
+                    user.State.SetState(new OrderDoctorState());
                 }
 
                 if (update.CallbackQuery.Data == "SuperOrder_state")
@@ -103,7 +103,7 @@ namespace MyBot.UserStates
                         chatId: user.Id,
                         text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                         replyMarkup: replyKeyboardMarkup));
-                    user.State.SetState(new OrderReady());
+                    user.State.SetState(new OrderDoctorState());
                 }
 
                 

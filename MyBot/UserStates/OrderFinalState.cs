@@ -12,13 +12,11 @@ namespace MyBot.UserStates
 {
     public class OrderFinalState : State
     {
-        private static MyBot_DBContext _dbContext;
+        private static readonly MyBot_DBContext _dbContext;
         public List<Drug> drugs = new List<Drug>();
         public List<User> users = new List<User>();
         //private List<Order> Orders = new List<Order>();
         private static List<Order> orders = new List<Order>(_dbContext.Orders);
-
-
 
         public override async Task UpdateHandler(User user, ITelegramBotClient botClient, Update update)
         {
@@ -31,11 +29,11 @@ namespace MyBot.UserStates
 
             if (update.CallbackQuery.Data == "YFinal_State")
             {
-                Orders.AddOrder(user.Order.Id, user.Order.NumberOfOrder, user.Order.DateOrder, user.Order.Drug.Id);
+                Orders.AddOrder(user.Order.Id, user.Order.NumberOfOrder, user.Order.DateOrder, user.Order.Drug.Id, user.Order.Doctor.Id);
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                        text: $"Ваш заказ был обработан, Спасибо за покупку.\nВаш заказ: Номер заказа: { user.Order.NumberOfOrder}\nПрепарат для покупки { user.Order.Drug.Title}\nДата заказа: { user.Order.DateOrder}\nСтоимость вашего заказа: { user.Order.Drug.Cost}"));
+                        text: $"Ваш заказ был обработан, Спасибо за покупку.\nВаш заказ: Номер заказа: { user.Order.NumberOfOrder}\nПрепарат для покупки { user.Order.Drug.Title}\nСпециалист: {user.Order.Doctor.FirstName}\nДата заказа: { user.Order.DateOrder}\nСтоимость вашего заказа: { user.Order.Drug.Cost}"));
 
                 await Task.CompletedTask;
             }

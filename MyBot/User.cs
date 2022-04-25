@@ -17,6 +17,8 @@ namespace MyBot
         public int DrugId { get; set; }
         public Order Order { get; set; }
         public int OrderId { get; set; }
+        public Doctor Doctor { get; set; }
+        public int DoctorId { get; set; }
 
         public User()
         {

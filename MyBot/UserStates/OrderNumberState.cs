@@ -14,15 +14,16 @@ namespace MyBot.UserStates
     {
         public List<Drug> Drugs = new List<Drug>();
         public List<Order> Orders = new List<Order>();
+        public List<Doctor> Doctors = new List<Doctor>();
 
         public override async Task UpdateHandler(User user, ITelegramBotClient botClient, Update update)
         {
             var connection = DbInstance.Get();
             Drugs = new List<Drug>(connection.Drugs.ToList());
             Orders = new List<Order>(connection.Orders.ToList());
-
+            Doctors = new List<Doctor>(connection.Doctors.ToList());
             user.Order.NumberOfOrder = update.Message.Text;
-
+            user.Order.Doctor = user.Doctor;
             InlineKeyboardMarkup replyKeyboardMarkup = new(
                    new[]{
                         InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YFinal_State"),
@@ -31,7 +32,7 @@ namespace MyBot.UserStates
 
             Console.WriteLine(await botClient.SendTextMessageAsync(
                 chatId: user.Id,
-                text: $"Подтвердите ваш заказ: Номер заказа: {user.Order.NumberOfOrder}\nПрепарат для покупки {user.Order.Drug.Title}\nДата заказа: {user.Order.DateOrder}\nСтоимость вашего заказа: {user.Order.Drug.Cost}",
+                text: $"Подтвердите ваш заказ: Номер заказа: {user.Order.NumberOfOrder}\nПрепарат для покупки {user.Order.Drug.Title}\nДата заказа: {user.Order.DateOrder}, \nВаш доктор {user.Order.Doctor.FirstName}\nСтоимость вашего заказа: {user.Order.Drug.Cost}",
                 replyMarkup: replyKeyboardMarkup));
 
             user.State.SetState(new OrderFinalState());
