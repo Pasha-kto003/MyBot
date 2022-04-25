@@ -56,7 +56,7 @@ namespace MyBot.UserStates
                     InlineKeyboardMarkup replyKeyboardMarkup = new(
                        new[]{
                             InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusSipleOrder_state"),
-                            InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus_state")
+                            InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
                        });
 
                     Console.WriteLine(await botClient.SendTextMessageAsync(
@@ -76,7 +76,7 @@ namespace MyBot.UserStates
                     InlineKeyboardMarkup replyKeyboardMarkup = new(
                        new[]{
                             InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusStrongOrder_state"),
-                            InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus_state")
+                            InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
                        });
 
                     Console.WriteLine(await botClient.SendTextMessageAsync(
@@ -96,7 +96,7 @@ namespace MyBot.UserStates
                     InlineKeyboardMarkup replyKeyboardMarkup = new(
                        new[]{
                             InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusSuperOrder_state"),
-                            InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus_state")
+                            InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
                        });
 
                     Console.WriteLine(await botClient.SendTextMessageAsync(
@@ -105,6 +105,8 @@ namespace MyBot.UserStates
                         replyMarkup: replyKeyboardMarkup));
                     user.State.SetState(new OrderReady());
                 }
+
+                
 
                 await Task.CompletedTask;
         }

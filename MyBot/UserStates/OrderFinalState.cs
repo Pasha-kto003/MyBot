@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace MyBot.UserStates
 {
@@ -21,7 +22,6 @@ namespace MyBot.UserStates
 
         public override async Task UpdateHandler(User user, ITelegramBotClient botClient, Update update)
         {
-            
             var connection = DbInstance.Get();
             drugs = new List<Drug>(connection.Drugs.ToList());
             //Orders = new List<Order>(connection.Orders.ToList());
@@ -35,10 +35,53 @@ namespace MyBot.UserStates
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                        text: $"Ваш заказ: {user.Order.NumberOfOrder}\nс препаратом {user.Order.Drug.Title},\nцена заказа: {user.Order.Drug.Cost} денег"));
+                        text: $"Ваш заказ был обработан, Спасибо за покупку.\nВаш заказ: Номер заказа: { user.Order.NumberOfOrder}\nПрепарат для покупки { user.Order.Drug.Title}\nДата заказа: { user.Order.DateOrder}\nСтоимость вашего заказа: { user.Order.Drug.Cost}"));
 
                 await Task.CompletedTask;
-            } 
+            }
+            else if (update.CallbackQuery.Data == "NFinal_state")
+            {
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: "Тогда вы можете выбрать другой препарат"));
+                await Task.CompletedTask;
+
+
+                var keyBoard = new List<List<InlineKeyboardButton>>();
+
+                foreach (Drug drug in drugs)
+                {
+                    Order order = new Order();
+                    order.DateOrder = DateTime.Now;
+                    user.Order = order;
+
+                    if (drug.Title == "Обычное лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SimpleOrder_state") });
+                    }
+                    if (drug.Title == "Аспирин")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "AspirinOrder_state") });
+                    }
+                    if (drug.Title == "Крепкое лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "StrongOrder_state") });
+                    }
+
+                    if (drug.Title == "Отличное лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SuperOrder_state") });
+                    }
+                }
+
+                var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: "Выбирайте лекарство",
+                    replyMarkup: replyKeyBoardMarkup));
+                user.State.SetState(new OrderState());
+                await Task.CompletedTask;
+            }
         }
     }
 }

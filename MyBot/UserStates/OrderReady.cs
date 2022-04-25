@@ -60,6 +60,44 @@ namespace MyBot.UserStates
                 user.State.SetState(new OrderNumberState());
             }
 
+            else if (update.CallbackQuery.Data == "NStatusOrder_state")
+            {
+
+                var keyBoard = new List<List<InlineKeyboardButton>>();
+
+                foreach (Drug drug in Drugs)
+                {
+                    Order order = new Order();
+                    order.DateOrder = DateTime.Now;
+                    user.Order = order;
+
+                    if (drug.Title == "Обычное лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SimpleOrder_state") });
+                    }
+                    if (drug.Title == "Аспирин")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "AspirinOrder_state") });
+                    }
+                    if (drug.Title == "Крепкое лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "StrongOrder_state") });
+                    }
+
+                    if (drug.Title == "Отличное лекарство")
+                    {
+                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SuperOrder_state") });
+                    }
+                }
+
+                var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                chatId: user.Id,
+                text: "Выбирайте лекарство",
+                replyMarkup: replyKeyBoardMarkup));
+                user.State.SetState(new OrderState());
+            }
+
             await Task.CompletedTask;
         }
     }

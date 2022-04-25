@@ -26,12 +26,12 @@ namespace MyBot.UserStates
             InlineKeyboardMarkup replyKeyboardMarkup = new(
                    new[]{
                         InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YFinal_State"),
-                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus_state")
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NFinal_state")
                    });
 
             Console.WriteLine(await botClient.SendTextMessageAsync(
                 chatId: user.Id,
-                text: $"Подтвердите номер вашего заказа: {user.Order.NumberOfOrder}",
+                text: $"Подтвердите ваш заказ: Номер заказа: {user.Order.NumberOfOrder}\nПрепарат для покупки {user.Order.Drug.Title}\nДата заказа: {user.Order.DateOrder}\nСтоимость вашего заказа: {user.Order.Drug.Cost}",
                 replyMarkup: replyKeyboardMarkup));
 
             user.State.SetState(new OrderFinalState());
