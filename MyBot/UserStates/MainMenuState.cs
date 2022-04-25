@@ -30,17 +30,6 @@ namespace MyBot.UserStates
             if (update.CallbackQuery == null)
                 return;
 
-            else if (update.CallbackQuery.Data == "main_state2")
-            {
-                await botClient.SendTextMessageAsync(user.Id, "Данная аптека работает на Telegram боте. Если вам нужно узнать список всех препаратов, следует нажать Препараты. Если вам нужны наши контакты нажмите на кнопку Контакты.");
-                user.State.SetState(new DefaultState());
-            }
-
-            else if(update.CallbackQuery.Data == "contact_state")
-            {
-                await botClient.SendContactAsync(user.Id, "8(924)-940-69-98", "Pasha-kto003");
-            }
-
             else if(update.CallbackQuery.Data == "help_state")
             {
                 var keyBoard = new List<List<InlineKeyboardButton>>();
