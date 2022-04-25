@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace MyBot.UserStates
 {
@@ -37,6 +38,111 @@ namespace MyBot.UserStates
                 await botClient.SendTextMessageAsync(user.Id, "Введите номер заказа");
                 user.State.SetState(new OrderNumberState());
             }
+
+                else if (update.CallbackQuery.Data == "NStatusOrder_state")
+                {
+                    var keyBoard = new List<List<InlineKeyboardButton>>();
+
+                    foreach (Doctor doctor in Doctors)
+                    {
+                        user.Order.Doctor = doctor;
+                        user.Order.DoctorId = doctor.Id;
+                        if (doctor.FirstName == "Алексей")
+                        {
+                            keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(doctor.FirstName, callbackData: "Doctor1Order_state") });
+                        }
+                        if (doctor.FirstName == "Даниил")
+                        {
+                            keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(doctor.FirstName, callbackData: "Doctor2Order_state") });
+                        }
+                    }
+
+                    var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                    Console.WriteLine(await botClient.SendTextMessageAsync(
+                        chatId: user.Id,
+                        text: "Выбирайте врача снова",
+                        replyMarkup: replyKeyBoardMarkup));
+                    user.State.SetState(new DoctorFin());
+                }
+
+                if (update.CallbackQuery.Data == "YStatusSipleOrder_state")
+                {
+                    var keyBoard = new List<List<InlineKeyboardButton>>();
+
+                    foreach (Doctor doctor in Doctors)
+                    {
+                        user.Order.Doctor = doctor;
+                        user.Order.DoctorId = doctor.Id;
+                        if (doctor.FirstName == "Алексей")
+                        {
+                            keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(doctor.FirstName, callbackData: "Doctor1Order_state") });
+                        }
+                        if (doctor.FirstName == "Даниил")
+                        {
+                            keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(doctor.FirstName, callbackData: "Doctor2Order_state") });
+                        }
+                    }
+
+                    var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                    Console.WriteLine(await botClient.SendTextMessageAsync(
+                        chatId: user.Id,
+                        text: "Выбирайте врача снова",
+                        replyMarkup: replyKeyBoardMarkup));
+                    user.State.SetState(new DoctorFin());
+                }
+
+                if (update.CallbackQuery.Data == "YStatusStrongOrder_state")
+                {
+                    var keyBoard = new List<List<InlineKeyboardButton>>();
+
+                    foreach (Doctor doctor in Doctors)
+                    {
+                        user.Order.Doctor = doctor;
+                        user.Order.DoctorId = doctor.Id;
+                        if (doctor.FirstName == "Алексей")
+                        {
+                            keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(doctor.FirstName, callbackData: "Doctor1Order_state") });
+                        }
+                        if (doctor.FirstName == "Даниил")
+                        {
+                            keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(doctor.FirstName, callbackData: "Doctor2Order_state") });
+                        }
+                    }
+
+                    var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                    Console.WriteLine(await botClient.SendTextMessageAsync(
+                        chatId: user.Id,
+                        text: "Выбирайте врача снова",
+                        replyMarkup: replyKeyBoardMarkup));
+                    user.State.SetState(new DoctorFin());
+                }
+
+                if (update.CallbackQuery.Data == "YStatusSuperOrder_state")
+                {
+                    var keyBoard = new List<List<InlineKeyboardButton>>();
+
+                    foreach (Doctor doctor in Doctors)
+                    {
+                        user.Order.Doctor = doctor;
+                        user.Order.DoctorId = doctor.Id;
+                        if (doctor.FirstName == "Алексей")
+                        {
+                            keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(doctor.FirstName, callbackData: "Doctor1Order_state") });
+                        }
+                        if (doctor.FirstName == "Даниил")
+                        {
+                            keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(doctor.FirstName, callbackData: "Doctor2Order_state") });
+                        }
+                    }
+
+                    var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
+                    Console.WriteLine(await botClient.SendTextMessageAsync(
+                        chatId: user.Id,
+                        text: "Выбирайте врача снова",
+                        replyMarkup: replyKeyBoardMarkup));
+                    user.State.SetState(new DoctorFin());
+                }
+            
         }
     }
 }

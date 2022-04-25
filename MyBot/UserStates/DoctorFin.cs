@@ -29,7 +29,7 @@ namespace MyBot.UserStates
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                    text: $"Ваш выбранный специалист: ",
+                    text: $"Ваш выбранный специалист: {user.Doctor.FirstName}",
                     replyMarkup: replyKeyboardMarkup));
                 user.State.SetState(new OrderDoctorReady());
             }
@@ -42,12 +42,12 @@ namespace MyBot.UserStates
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                            new[]{
                             InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatus1Order_state"),
-                            InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
+                            InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus1Order_state")
                            });
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                    text: $"Ваш выбранный специалист: ",
+                    text: $"Ваш выбранный специалист: {user.Doctor.FirstName}",
                     replyMarkup: replyKeyboardMarkup));
                 user.State.SetState(new OrderDoctorReady());
             }
