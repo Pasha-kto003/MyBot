@@ -30,40 +30,6 @@ namespace MyBot.UserStates
             if (update.CallbackQuery == null)
                 return;
 
-            if (update.CallbackQuery.Data == "main_state1")
-            {
-                var keyBoard = new List<List<InlineKeyboardButton>>();
-
-                foreach(Drug drug in Drugs)
-                {
-
-                    if (drug.Title == "Обычное лекарство")
-                    {
-                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SimpleDrug_state") });
-                    }
-                    if (drug.Title == "Аспирин")
-                    {
-                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "Aspirin_state") });
-                    }
-                    if (drug.Title == "Крепкое лекарство")
-                    {
-                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "StrongDrug_state") });
-                    }
-
-                    if (drug.Title == "Отличное лекарство")
-                    {
-                        keyBoard.Add(new List<InlineKeyboardButton> { InlineKeyboardButton.WithCallbackData(drug.Title, callbackData: "SuperDrug_state") });
-                    }
-                }
-
-                var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
-                Console.WriteLine(await botClient.SendTextMessageAsync(
-                    chatId: user.Id,
-                    text: "Вот наш ассортимент",
-                    replyMarkup: replyKeyBoardMarkup));
-
-                user.State.SetState(new NewState());
-            }
             else if (update.CallbackQuery.Data == "main_state2")
             {
                 await botClient.SendTextMessageAsync(user.Id, "Данная аптека работает на Telegram боте. Если вам нужно узнать список всех препаратов, следует нажать Препараты. Если вам нужны наши контакты нажмите на кнопку Контакты.");
