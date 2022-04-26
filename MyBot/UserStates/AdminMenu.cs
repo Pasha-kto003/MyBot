@@ -31,13 +31,10 @@ namespace MyBot.UserStates
                         InlineKeyboardButton.WithCallbackData(text: "Узнать список заказов", callbackData: "OrderList_State"),
                         InlineKeyboardButton.WithCallbackData(text: "Создать новый препарат", callbackData: "AddDrug_state")
                     });
-
-                // меняем интерфейс
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
                     text: "Какие действия хотите совершить?",
                     replyMarkup: replyKeyboardMarkup));
-                //user.State.SetState(new StatusState());
             }
 
             else if (update.CallbackQuery.Data == "OrderList_State")
