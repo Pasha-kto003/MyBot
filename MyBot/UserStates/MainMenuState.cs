@@ -93,10 +93,5 @@ namespace MyBot.UserStates
 
             await Task.CompletedTask;
         }
-
-        //public IEnumerable<Drug> Get()
-        //{
-        //    return dBContext.Drugs.ToList();
-        //}
     }
 }
