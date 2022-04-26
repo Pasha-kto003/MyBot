@@ -21,6 +21,7 @@ namespace MyBot.UserStates
             {
                 user.Doctor = Doctors.FirstOrDefault(s => s.FirstName == "Алексей");
                 user.Order.DoctorId = user.Doctor.Id;
+                user.Order.Doctor = user.Doctor;
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                            new[]{
                             InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusOrder_state"),
@@ -38,7 +39,7 @@ namespace MyBot.UserStates
             {
                 user.Doctor = Doctors.FirstOrDefault(s => s.FirstName == "Даниил");
                 user.Order.DoctorId = user.Doctor.Id;
-
+                user.Order.Doctor = user.Doctor;
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                            new[]{
                             InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatus1Order_state"),

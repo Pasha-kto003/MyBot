@@ -85,6 +85,12 @@ namespace MyBot.UserStates
                 user.State.SetState(new OrderState());
             }
 
+            else if (update.CallbackQuery.Data == "admin_state")
+            {
+                await botClient.SendTextMessageAsync(user.Id, "Ваш пароль?");
+                user.State.SetState(new AdminState());
+            }
+
             await Task.CompletedTask;
         }
 
