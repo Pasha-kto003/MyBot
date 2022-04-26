@@ -36,6 +36,21 @@ namespace MyBot.UserStates
                         text: $"Ваш заказ был обработан, Спасибо за покупку.\nВаш заказ: Номер заказа: { user.Order.NumberOfOrder}\nПрепарат для покупки { user.Order.Drug.Title}\nСпециалист: {user.Order.Doctor.FirstName}\nДата заказа: { user.Order.DateOrder}\nСтоимость вашего заказа: { user.Order.Drug.Cost}"));
 
                 await Task.CompletedTask;
+
+                var keyBoard = new List<List<InlineKeyboardButton>>();
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
+                    new[]{
+                        InlineKeyboardButton.WithCallbackData(text: "Картой", callbackData: "CardPay_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Наличными средствами", callbackData: "MoneyPay_state"),
+                        
+                    }); 
+
+                // меняем интерфейс
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: "Какой способ оплаты",
+                    replyMarkup: replyKeyboardMarkup));
+                user.State.SetState(new PayState());
             }
             else if (update.CallbackQuery.Data == "NFinal_state")
             {
