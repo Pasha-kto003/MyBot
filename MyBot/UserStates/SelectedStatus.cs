@@ -44,14 +44,14 @@ namespace MyBot.UserStates
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                    new[]{
                         InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusOrder_state"),
-                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatus_state")
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
                    });
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
                     text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                     replyMarkup: replyKeyboardMarkup));
-                user.State.SetState(new OrderReady());
+                user.State.SetState(new OrderDoctorState());
             }
 
             else if(update.CallbackQuery.Data == "help_state3")
@@ -67,14 +67,14 @@ namespace MyBot.UserStates
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                   new[]{
                         InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusStrongOrder_state"),
-                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusMiddle_state")
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
                   });
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
                     text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                     replyMarkup: replyKeyboardMarkup));
-                user.State.SetState(new OrderReady());
+                user.State.SetState(new OrderDoctorState());
             }
 
             else if (update.CallbackQuery.Data == "help_state5")
@@ -90,14 +90,14 @@ namespace MyBot.UserStates
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                   new[]{
                         InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusSipleOrder_state"),
-                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusMiddleCopy_state")
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
                   });
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
                     text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                     replyMarkup: replyKeyboardMarkup));
-                user.State.SetState(new OrderReady());
+                user.State.SetState(new OrderDoctorState());
             }
 
             else if(update.CallbackQuery.Data == "help_state4")
@@ -113,14 +113,14 @@ namespace MyBot.UserStates
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                   new[]{
                         InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YStatusSuperOrder_state"),
-                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusCritical_state")
+                        InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
                   });
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
                     text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
                     replyMarkup: replyKeyboardMarkup));
-                user.State.SetState(new OrderReady());
+                user.State.SetState(new OrderDoctorState());
             }
             
         }

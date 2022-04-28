@@ -29,8 +29,8 @@ namespace MyBot.UserStates
                 user.Drug = Drugs.FirstOrDefault(s => s.Title == "Аспирин");
                 user.DrugId = user.Drug.Id;
 
-                await botClient.SendTextMessageAsync(user.Id, "Введите номер заказа");
-                user.State.SetState(new OrderNumberState());
+                await botClient.SendTextMessageAsync(user.Id, "Выберите врача");
+                user.State.SetState(new OrderDoctorState());
             }
 
             else if (update.CallbackQuery.Data == "YStatusSipleOrder_state")
@@ -38,8 +38,8 @@ namespace MyBot.UserStates
                 user.Drug = Drugs.FirstOrDefault(s => s.Title == "Обычное лекарство");
                 user.DrugId = user.Drug.Id;
 
-                await botClient.SendTextMessageAsync(user.Id, "Введите номер заказа");
-                user.State.SetState(new OrderNumberState());
+                await botClient.SendTextMessageAsync(user.Id, "Выберите врача");
+                user.State.SetState(new OrderDoctorState());
             }
 
             else if (update.CallbackQuery.Data == "YStatusStrongOrder_state")
@@ -47,8 +47,8 @@ namespace MyBot.UserStates
                 user.Drug = Drugs.FirstOrDefault(s => s.Title == "Крепкое лекарство");
                 user.DrugId = user.Drug.Id;
 
-                await botClient.SendTextMessageAsync(user.Id, "Введите номер заказа");
-                user.State.SetState(new OrderNumberState());
+                await botClient.SendTextMessageAsync(user.Id, "Выберите врача");
+                user.State.SetState(new OrderDoctorState());
             }
 
             else if (update.CallbackQuery.Data == "YStatusSuperOrder_state")
@@ -56,8 +56,8 @@ namespace MyBot.UserStates
                 user.Drug = Drugs.FirstOrDefault(s => s.Title == "Отличное лекарство");
                 user.DrugId = user.Drug.Id;
 
-                await botClient.SendTextMessageAsync(user.Id, "Введите номер заказа");
-                user.State.SetState(new OrderNumberState());
+                await botClient.SendTextMessageAsync(user.Id, "Выберите врача");
+                user.State.SetState(new OrderDoctorState());
             }
 
             else if (update.CallbackQuery.Data == "NStatusOrder_state")

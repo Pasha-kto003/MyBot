@@ -39,9 +39,7 @@ namespace MyBot.UserStates
                     ParseMode.Markdown,
                     replyMarkup: replyKeyboardMarkup);
 
-                user.State.SetState(new MainMenuState()); // тут указываем класс-обработчик новых команд, таких классов может быть дофига
-
-                
+                user.State.SetState(new MainMenuState());
             }
         }
     }
