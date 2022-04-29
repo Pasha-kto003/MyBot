@@ -28,8 +28,7 @@ namespace MyBot.UserStates
                 var keyBoard = new List<List<InlineKeyboardButton>>();
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                     new[]{
-                        InlineKeyboardButton.WithCallbackData(text: "Узнать список заказов", callbackData: "OrderList_State"),
-                        InlineKeyboardButton.WithCallbackData(text: "Создать новый препарат", callbackData: "AddDrug_state")
+                        InlineKeyboardButton.WithCallbackData(text: "Узнать список заказов", callbackData: "OrderList_State")
                     });
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,

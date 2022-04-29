@@ -90,7 +90,7 @@ namespace MyBot.UserStates
                 var replyKeyBoardMarkup = new InlineKeyboardMarkup(keyBoard);
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                    text: "Выбирайте лекарство",
+                    text: "Заново выбирайте лекарство",
                     replyMarkup: replyKeyBoardMarkup));
                 user.State.SetState(new OrderState());
                 await Task.CompletedTask;
