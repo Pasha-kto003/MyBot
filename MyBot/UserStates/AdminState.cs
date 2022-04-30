@@ -15,17 +15,34 @@ namespace MyBot.UserStates
         {
             user.Password = update.Message.Text;
 
-            InlineKeyboardMarkup replyKeyboardMarkup = new(
+            if(update.Message.Text == "admin123")
+            {
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
                   new[]{
                         InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "YAdmin_State"),
                         InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NFinal_state")
                   });
 
-            Console.WriteLine(await botClient.SendTextMessageAsync(
-                chatId: user.Id,
-                text: $"Подтвердите ваш пароль {user.UserName}, пароль: {user.Password}",
-                replyMarkup: replyKeyboardMarkup));
-            user.State.SetState(new AdminMenu());
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: $"Подтвердите ваш пароль {user.UserName}, пароль: {user.Password}",
+                    replyMarkup: replyKeyboardMarkup));
+                user.State.SetState(new AdminMenu());
+            }
+
+            else
+            {
+                InlineKeyboardMarkup replyKeyboardMarkup = new(
+                  new[]{
+                        InlineKeyboardButton.WithCallbackData(text: "Да!", callbackData: "ErrorAdmin_State"),
+                        InlineKeyboardButton.WithCallbackData(text: "Повтор", callbackData: "ResetPassword_State")
+                  });
+                Console.WriteLine(await botClient.SendTextMessageAsync(
+                    chatId: user.Id,
+                    text: $"Пароль неверный, вернуться в главное меню?",
+                    replyMarkup: replyKeyboardMarkup));
+                user.State.SetState(new PasswordError());
+            }
         }
     }
 }
