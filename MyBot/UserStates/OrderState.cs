@@ -105,9 +105,6 @@ namespace MyBot.UserStates
                         replyMarkup: replyKeyboardMarkup));
                     user.State.SetState(new OrderDoctorState());
                 }
-
-                
-
                 await Task.CompletedTask;
         }
     }

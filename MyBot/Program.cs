@@ -29,6 +29,7 @@ namespace MyBot
             bot.StartReceiving(Handlers.HandleUpdateAsync, Handlers.HandleErrorAsync, receiverOptions, cts.Token);
 
             Console.WriteLine($"Start listening.");
+            Console.WriteLine("Все наши препараты:");
             foreach (Drug drug in Drugs)
             {
                 Console.WriteLine($"{drug.Title}");
@@ -37,9 +38,5 @@ namespace MyBot
 
             cts.Cancel();
         }
-        //public IEnumerable<Drug> Get()
-        //{
-        //    return dBContext.Drugs.ToList();
-        //}
     }
 }
