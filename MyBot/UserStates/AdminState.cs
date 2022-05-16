@@ -30,19 +30,6 @@ namespace MyBot.UserStates
                 user.State.SetState(new AdminMenu());
             }
 
-            //else if (update.Message.Text == "/reset")
-            //{
-            //    InlineKeyboardMarkup replyKeyboardMarkup = new(
-            //      new[]{
-            //            InlineKeyboardButton.WithCallbackData(text: "Повтор", callbackData: "ResetPassword_State")
-            //      });
-            //    Console.WriteLine(await botClient.SendTextMessageAsync(
-            //        chatId: user.Id,
-            //        text: $"Повторите пароль?",
-            //        replyMarkup: replyKeyboardMarkup));
-            //    user.State.SetState(new PasswordError());
-            //}
-
             else if (update.Message.Text != "admin123")
             {
                 InlineKeyboardMarkup replyKeyboardMarkup = new(

@@ -39,9 +39,9 @@ namespace MyBot.UserStates
                             InlineKeyboardButton.WithCallbackData(text: "Нет!", callbackData: "NStatusOrder_state")
                        });
 
-                    Console.WriteLine(await botClient.SendTextMessageAsync(
+                    Console.Write(await botClient.SendTextMessageAsync(
                         chatId: user.Id,
-                        text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
+                        text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description}\nБудете приобретать?",
                         replyMarkup: replyKeyboardMarkup));
                     user.State.SetState(new OrderDoctorState());
                 }

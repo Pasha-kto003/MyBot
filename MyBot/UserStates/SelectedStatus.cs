@@ -49,7 +49,7 @@ namespace MyBot.UserStates
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                    text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
+                    text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description}\nБудете приобретать?",
                     replyMarkup: replyKeyboardMarkup));
                 user.State.SetState(new OrderDoctorState());
             }
@@ -72,7 +72,7 @@ namespace MyBot.UserStates
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                    text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
+                    text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description}\nБудете приобретать?",
                     replyMarkup: replyKeyboardMarkup));
                 user.State.SetState(new OrderDoctorState());
             }
@@ -95,7 +95,7 @@ namespace MyBot.UserStates
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                    text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
+                    text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description}\nБудете приобретать?",
                     replyMarkup: replyKeyboardMarkup));
                 user.State.SetState(new OrderDoctorState());
             }
@@ -118,7 +118,7 @@ namespace MyBot.UserStates
 
                 Console.WriteLine(await botClient.SendTextMessageAsync(
                     chatId: user.Id,
-                    text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description} \n Будете приобретать?",
+                    text: $"Ваш выбранный препарат:\n{ user.Drug.Title },\nДанный препарат востанавливает {user.Drug.Cost} единиц здоровья,\nВоздействие на организм: {user.Drug.Description}\nБудете приобретать?",
                     replyMarkup: replyKeyboardMarkup));
                 user.State.SetState(new OrderDoctorState());
             }
