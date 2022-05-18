@@ -28,8 +28,8 @@ namespace MyBot.UserStates
             {
                 InlineKeyboardMarkup replyKeyboardMarkup = new(
                     new[]{
-                        InlineKeyboardButton.WithCallbackData(text: "Помощь с выбором препарата?", callbackData: "help_state"),
-                        InlineKeyboardButton.WithCallbackData(text: "Сформировать заказ", callbackData: "order_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Помощь", callbackData: "help_state"),
+                        InlineKeyboardButton.WithCallbackData(text: "Заказ", callbackData: "order_state"),
                         InlineKeyboardButton.WithCallbackData(text: "Вы Админ?", callbackData: "admin_state")
                     });
 

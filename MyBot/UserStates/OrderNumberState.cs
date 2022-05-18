@@ -32,7 +32,7 @@ namespace MyBot.UserStates
 
             Console.WriteLine(await botClient.SendTextMessageAsync(
                 chatId: user.Id,
-                text: $"Подтвердите ваш заказ:\n\nНомер заказа: {user.Order.NumberOfOrder}\nПрепарат для покупки {user.Order.Drug.Title}\nДата заказа: {user.Order.DateOrder},\n\nВаш доктор {user.Order.Doctor.FirstName}\nСтоимость вашего заказа: {user.Order.Drug.Cost}",
+                text: $"Подтвердите ваш заказ:\n\nНомер заказа: {user.Order.NumberOfOrder}\nПрепарат для покупки: {user.Order.Drug.Title}\nДата заказа: {user.Order.DateOrder},\n\nВаш доктор {user.Order.Doctor.FirstName}\nСтоимость вашего заказа: {user.Order.Drug.Cost}",
                 replyMarkup: replyKeyboardMarkup));
 
             user.State.SetState(new OrderFinalState());
